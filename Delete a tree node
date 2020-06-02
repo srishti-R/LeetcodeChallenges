@@ -1,0 +1,18 @@
+tricky because pointer to that node was given instead of head, enjoyed it.
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void deleteNode(ListNode node) {
+        //making a copy of the next node into current node
+       ListNode temp=node.next;
+        node.val=temp.val;
+        //now deleting the next(copied) node
+        node.next=temp.next;
+    }
+}
