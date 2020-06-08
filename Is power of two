@@ -1,0 +1,40 @@
+Determine if a number is power of two.
+## First Approach
+<pre>
+<code>
+double x=Math.log(n)/Math.log(2);
+return x==(int)x;
+</code>
+</pre>
+Obviously it failed some test cases, double could not contain larger values.
+## Second Approach
+<pre>
+<code>
+static boolean isPowerOfTwo(int n) 
+{ 
+    if(n==0) 
+    return false; 
+  
+return (int)(Math.ceil((Math.log(n) / Math.log(2)))) ==  
+       (int)(Math.floor(((Math.log(n) / Math.log(2))))); 
+} 
+<pre>
+<code>
+gave error for test case 5837012
+<pre>
+<code>
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if(n==0) return false;
+        while(n!=1){
+            if(n%2!=0){
+              return false;  
+            }
+            n=n/2;
+        }
+        
+        return true;
+    }
+}
+</pre>
+</code>
