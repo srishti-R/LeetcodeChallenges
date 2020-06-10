@@ -1,0 +1,25 @@
+Given a string s and a string t, check if s is subsequence of t.<br/>
+
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of <br/>
+the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde"
+while "aec" is not).
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+    //for edge case s=""
+        if(s.length()==0){
+            return true;
+        }
+        int j=0;
+        for(int i=0; i<t.length(); i++){
+           if(s.charAt(j)==t.charAt(i)) {
+               ++j;
+           }
+            if(j==s.length()){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+## Status: Solved
