@@ -1,0 +1,78 @@
+Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies:
+
+Si % Sj = 0 or Sj % Si = 0.
+
+If there are multiple solutions, return any subset is fine.
+
+# Sol 1
+class Solution {
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        List<Integer> list=new ArrayList<>();
+        Arrays.sort(nums);
+       
+        int maxDivCount=0;
+        int index=0;
+        for(int i=0; i<nums.length; i++){
+             int divCount=0;
+            for(int j=i; j<nums.length; j++){
+                if(nums[j]%nums[i]==0){
+                    divCount++;
+                }
+            }
+            if(divCount>maxDivCount){
+                maxDivCount=divCount;
+                index=i;
+            }
+            divCount=0;
+        }
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]%nums[index]==0){
+                list.add(nums[i]);
+            }
+        }
+        return list;
+    }
+}
+# Status Solved. Won't work if the array starts with 1.
+
+# Sol 2
+ int divCount[] = new int[arr.length]; 
+          
+        // we will always have atleast one  
+        // element divisible by itself 
+        Arrays.fill(divCount, 1); 
+  
+        // maintain the index of the last increment 
+        int prev[] = new int[arr.length]; 
+        Arrays.fill(prev, -1); 
+  
+        // index at which last increment happened 
+        int max_ind = 0; 
+  
+        for (int i = 1; i < arr.length; i++) { 
+            for (int j = 0; j < i; j++) { 
+  
+                // only increment the maximum index if  
+                // this iteration will increase it 
+                if (arr[i] % arr[j] == 0 &&  
+                    divCount[i] < divCount[j] + 1) { 
+                    prev[i] = j; 
+                    divCount[i] = divCount[j] + 1; 
+  
+                } 
+  
+            } 
+        // Update last index of largest subset if size 
+        // of current subset is more. 
+            if (divCount[i] > divCount[max_ind]) 
+                max_ind = i; 
+        } 
+  
+        // Print result 
+        int k = max_ind; 
+        while (k >= 0) { 
+            System.out.print(arr[k] + " "); 
+            k = prev[k]; 
+        } 
+        
+ # Status copied. I'll never be able to come up with an algo like this.
