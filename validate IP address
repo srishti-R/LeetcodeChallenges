@@ -1,0 +1,25 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+class Solution {
+    public String validIPAddress(String IP) {
+        String res="Neither";
+        String ip4 
+            = "(\\d{1,2}|(1)\\"
+              + "d{2}|2[0-4]\\d|25[0-5])";
+        String p=ip4+"\\."+ip4+"\\."+ip4+"\\."+ip4;
+        String ip6="[0-9A-Fa-f]{1,4}";
+        String h=ip6+":"+ip6+":"+ip6+":"+ip6+":"+ip6+":"+ip6+":"+ip6+":"+ip6;
+        Pattern patt4 = Pattern.compile(p);
+        Pattern patt6=Pattern.compile(h);
+        Matcher m = patt4.matcher(IP);
+        Matcher m6=patt6.matcher(IP);
+        if(m.matches()){
+          res="IPv4";
+        }
+        if(m6.matches()){
+            res="IPv6";
+        }
+        return res;
+    }
+}
+# Status: could not solve for test case "01.01.01.01", which is not supposed to be an IP address, but it should be.
