@@ -1,0 +1,26 @@
+class Solution {
+    public int calculateMinimumHP(int[][] dungeon) {
+        int rows=dungeon.length;
+        int cols=dungeon[0].length;
+        int dp[][]=new int[rows][cols];
+        //base case
+        dp[rows-1][cols-1]=dungeon[rows-1][cols-1]>0?1:1-(dungeon[rows-1][cols-1]);
+        //fill last row and col
+               for (int i = rows-2; i >= 0; i--) 
+             dp[i][cols-1] = Math.max(dp[i+1][cols-1] - dungeon[i][cols-1], 1); 
+        for (int j = cols-2; j >= 0; j--) 
+             dp[rows-1][j] = Math.max(dp[rows-1][j+1] - dungeon[rows-1][j], 1); 
+        //rest
+         for (int i=rows-2; i>=0; i--) 
+        { 
+            for (int j=cols-2; j>=0; j--) 
+            { 
+                int min_points_on_exit = Math.min(dp[i+1][j], dp[i][j+1]); 
+                dp[i][j] = Math.max(min_points_on_exit - dungeon[i][j], 1); 
+            } 
+         } 
+       
+         return dp[0][0]; 
+    }
+}
+#Status: took help from gfg
