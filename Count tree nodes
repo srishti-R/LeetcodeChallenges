@@ -1,0 +1,15 @@
+class Solution {
+     
+    public int countNodes(TreeNode root) {
+     
+    int c =  1;             //Node itself should be counted
+    if (root ==null)
+        return 0;
+    else
+    {
+        c += countNodes(root.left);
+        c += countNodes(root.right);
+        return c;
+    }
+    }
+}
