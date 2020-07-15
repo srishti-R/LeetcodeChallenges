@@ -1,0 +1,23 @@
+class Solution {
+    public String reverseWords(String s) {
+        String y=s.trim();
+        String res="";
+        // System.out.println(y);
+        String[] arr=y.split("\\s+");
+        int j=arr.length;
+        for(int i=0; i<arr.length/2; i++){
+            String t=arr[j-1];
+            arr[j-1]=arr[i];
+            arr[i]=t;
+            j--;
+            // System.out.println(Arrays.toString(arr));
+        }
+        // System.out.println(Arrays.toString(arr));
+        for(String p:arr){
+            res+=p;
+            res+=" ";
+        }
+        return res.trim();
+    }
+}
+#Status: SOlved
