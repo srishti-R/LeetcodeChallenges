@@ -1,0 +1,8 @@
+Either this question was a joke or I couldn't understand the challenge behind it, maybe tests could've been better.
+class Solution {
+    public double myPow(double x, int n) {
+        double ans=Math.pow(x,n);
+        return ans;
+    }
+}
+# Status: Obviously 
