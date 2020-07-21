@@ -1,0 +1,30 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int l=board.length;
+        int b=board[0].length;
+        for(int i=0; i<l; i++){
+            for(int j=0; j<b; j++){
+                if(findMatch(board, word,i,j, 0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    boolean findMatch(char[][] b, String w,int row, int col, int level){
+       if(w.length()==level) {
+           return true;
+       }
+        if(row<0 || col<0 || row>=b.length || col>=b[0].length) return false;
+        if(b[row][col]==w.charAt(level)){
+            char temp=b[row][col];
+            b[row][col]='$';
+            boolean res=findMatch(b, w, row+1, col, level+1)| findMatch(b,w,row, col+1, level+1)| findMatch(b, w, row-1, col, level+1)| findMatch(b,w,row, col-1, level+1);
+            b[row][col]=temp;
+            return res;
+        } else return false;
+    }
+}
+
+#Status: Couldnt solve two test cases, time limit exceeded, but I am tired now.
