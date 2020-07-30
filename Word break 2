@@ -1,0 +1,31 @@
+  List<String> wordBreakHelper(String s, List<String> wordDict, String out){
+         List<String> res=new ArrayList<>();
+        if(s.length()==0) {
+             res.add(out.trim());
+            out="";
+            System.out.println("out"+res.toString());
+            return res;
+        }
+        for(int i=1; i<=s.length(); i++){
+            String prev=s.substring(0,i);
+            if(wordDict.contains(prev)){
+                out=out+" "+prev;
+                System.out.println(out);
+                wordBreakHelper(s.substring(i), wordDict, out);
+               
+            }
+        }
+        return res;
+    }
+}
+
+# Status: Failed to solve.
+ cat
+ cat sand
+ cat sand dog
+out[cat sand dog]
+ cat cats
+ cat cats and
+ cat cats and dog
+out[cat cats and dog]
+I might be close. Didnt want to go with dynamic programming
