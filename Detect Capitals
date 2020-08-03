@@ -1,0 +1,18 @@
+Accepted cases: when all small case in a word, when initial capital, when all capitals
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        if(word==null || word.length()==0) return true;
+        int count=0;
+        for(int i=0; i<word.length(); i++){
+            char c=word.charAt(i);
+            if(c>='A' && c<='Z'){
+                count++;
+            }
+        }
+        if(count==word.length()) return true;
+        if(count==1 && (word.charAt(0)>='A' && word.charAt(0)<='Z')) return true;
+        if(count==0) return true;
+        else return false;
+    }
+}
+#Status: solved
