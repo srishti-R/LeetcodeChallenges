@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        
+       int left=0;
+        int right=s.length()-1;
+        s = s.toLowerCase();
+        
+        while(left<right){
+            char leftChar=s.charAt(left);
+        char rightChar=s.charAt(right);
+            System.out.println("left"+leftChar);
+            System.out.println("right"+rightChar);
+           if(!(Character.isDigit(leftChar) || Character.isLetter(leftChar))) {
+               left++;
+           continue;}
+            if(!(Character.isDigit(rightChar) || Character.isLetter(rightChar))){
+              right--;
+                continue;
+            } 
+            if(rightChar==leftChar) {
+                left++;
+                right--;
+            }
+            else return false;
+        }
+        return true;
+    }
+}
+# Status: tricky in part where i had to skip non alpha num characters, Solved
