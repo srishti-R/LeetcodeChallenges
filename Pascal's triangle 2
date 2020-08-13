@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> getRow(int n) {
+       int[][] res=new int[n+1][n+1];
+        List<Integer> r=new ArrayList<>();
+        for(int i=0; i<=n; i++){
+            // System.out.println("line "+i);
+            for (int j=0; j<=i; j++){    //TODO
+                 // System.out.println("space "+j);
+                if (i==j || j == 0) 
+        res[i][j] = 1; 
+              else res[i][j]=res[i-1][j-1]+res[i-1][j];
+                if(i==n)
+                r.add(res[i][j]);
+                // System.out.println(res[i][j]);
+            }
+            
+        }
+        return r;
+    }
+}
+
+# Status:Solved
