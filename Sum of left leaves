@@ -1,0 +1,25 @@
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        int res=0;
+        if(root!=null){
+           if(isLeaf(root.left)){
+            res+=root.left.val;
+        }
+        else {
+            res+=sumOfLeftLeaves(root.left);
+            
+        }  
+            res+=sumOfLeftLeaves(root.right);
+        }
+       
+         return res;
+        
+    }
+    
+    boolean isLeaf(TreeNode node){
+        if(node==null) return false;
+        if(node.right==null && node.left==null) return true;
+        else return false;
+    }
+}
+#Status: Solved
