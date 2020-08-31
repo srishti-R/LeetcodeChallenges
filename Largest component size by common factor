@@ -1,0 +1,79 @@
+class Solution {
+    
+    public int largestComponentSize(int[] A) {
+        //initialising dsu with largest elemnet of array
+        int max=Integer.MIN_VALUE;
+        for(int val:A){
+           if(val>max){
+               max=val;
+           } 
+        }
+        // System.out.println("max"+max);
+        DSU dsu=new DSU(max+1);
+        //union factors and their multiples
+        for(int val:A){
+            for(int i=2; i<=Math.sqrt(val);i++){
+                if(val%i==0){
+                    dsu.union(i, val);
+                    dsu.union(val, val/i);
+                    // System.out.println("round"+i+"val"+val+"val/i"+val/i);
+                }
+            }
+        }
+        
+        //find the parents occurring max times
+        HashMap<Integer, Integer> hmap=new HashMap<>();
+        
+        for(int val:A){
+            int parent=dsu.findRoots(val);
+            // System.out.println("parent1"+ parent);
+            hmap.put(parent, hmap.getOrDefault(parent,0)+1);
+            // System.out.println("freq"+hmap.get(parent));
+        }
+        
+        int res=Integer.MIN_VALUE;
+        for(int val:A){
+            int parent=dsu.findRoots(val);
+            // System.out.println("parent"+parent);
+            res=Math.max(res,hmap.get(parent));
+            // System.out.println("res"+res);
+            
+        }
+        
+        return res;
+    }
+}
+
+public class DSU{
+    int[] parents;
+    int N;
+    
+     DSU(int N) {
+        this.N = N;
+        parents = new int[N];
+        initDisjoinSet();
+    }
+    
+       void initDisjoinSet() {
+        for (int i = 0; i < N; i++) {
+            parents[i] = i;
+        }
+    }
+    
+    int findRoots(int x){
+        if(parents[x]!=x){
+            parents[x]=findRoots(parents[x]);
+        }
+        
+        return parents[x];
+    }
+    
+    void union(int x, int y){
+        int rootX=findRoots(x);
+        int rootY=findRoots(y);
+        if(rootX==rootY) return;
+        parents[rootX]=rootY;
+    }
+}
+
+#Status: Learnt about disjoint sets in java and how and when to implement them, spent over an hour for a silly mistake. Solved.
