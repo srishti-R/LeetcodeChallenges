@@ -1,0 +1,50 @@
+#After spending an entire day over this question, still couldn't solve for one test case:
+Input: [-2147483648,-2147483647]
+3
+3
+Output: false
+Expected: true
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        // for(int i=0; i<nums.length;i++){
+        //     // for(int j=i+k;j>i && i+k<nums.length;j--){
+        //     //     if(Math.abs(nums[j]-nums[i])<=t){
+        //     //         // System.out.println("diff b/w i j"+Math.abs(nums[j]-nums[i]));
+        //     //         return true;
+        //     //     }
+        //     // }
+        //     for(int j=i+1; j<nums.length; j++){
+        //         if(Math.abs(Math.abs(nums[j])-Math.abs(nums[i]))<=t && j-i<=k){
+        //             // System.out.println("diff b/w i j"+Math.abs(nums[j]-nums[i]));
+        //             return true;
+        //         } 
+        //     }
+        // }
+        // return false;
+        
+         if (nums == null || nums.length <= 1 || k <= 0 || t < 0) {
+            return false;
+        }
+         
+        TreeSet<Integer> treeSet = new TreeSet<>();
+         
+        for (int i = 0; i < nums.length; i++) {
+            Integer floor = treeSet.floor(nums[i] + t);
+            Integer ceil =treeSet.ceiling(nums[i] - t);
+             
+            if ((floor != null && floor >= nums[i]) 
+                || (ceil != null && ceil <= nums[i])) {
+                return true;
+            }
+             
+            treeSet.add(nums[i]);
+             
+            if (i >= k) {
+                treeSet.remove(nums[i - k]);
+            }
+        }
+         
+        return false;
+    
+    }
+}
