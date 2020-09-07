@@ -1,0 +1,47 @@
+Firstly i attempted this:
+class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        char[] pattarr=pattern.toCharArray();
+        // System.out.println(Arrays.toString(pattarr));
+        String[] strarr=str.split(" ");
+        // System.out.println(Arrays.toString(strarr));
+        if(strarr.length!=pattarr.length) return false;
+        HashMap<Character, String> hmap=new HashMap<>();
+        for(int i=0; i<pattarr.length; i++){
+            char letter=pattarr[i];
+            String word=strarr[i];
+            // System.out.println(letter+word);
+            
+            if(hmap.containsKey(letter)){
+                // System.out.println("hmap contains key"+letter);
+               if(hmap.get(letter).equals(word)){
+                                   // System.out.println("hmap contains key"+hmap.get(letter).equals(word));
+
+                   if(i==pattarr.length-1) return true;
+                   else continue;
+               } 
+                else return false;
+            }
+            else hmap.put(letter, word);
+        }
+        return false;
+    }
+}
+But then it got stuck for test case [a,b,b,a] [dog,dog,dog,dog].
+So I came up with this:
+class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        String[] strarr=str.split(" ");
+        // System.out.println(Arrays.toString(strarr));
+        if(strarr.length!=pattern.length()) return false;
+        Map hmap=new HashMap();
+        for(Integer i=0; i<pattern.length(); i++){
+           
+            if(hmap.put(pattern.charAt(i),i)!=hmap.put(strarr[i], i)) return false;
+            if(i==pattern.length()-1) return true;
+            else continue;
+        }
+        return false;
+	
+    }
+}
