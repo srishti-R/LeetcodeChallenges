@@ -1,0 +1,18 @@
+class Solution {
+    int res=0;
+    public int sumRootToLeaf(TreeNode root) {
+        sumUtils(root, "");
+        return res;
+    }
+    
+void sumUtils(TreeNode node, String sum){
+        //if node is leaf, add its val to value
+        if(node==null) return ;
+        sum=sum+String.valueOf(node.val);
+        if(node.left==null && node.right==null) {
+            res+=Integer.parseInt(sum,2);
+        
+        }
+        sumUtils(node.left, sum);
+    sumUtils(node.right, sum);
+    }
