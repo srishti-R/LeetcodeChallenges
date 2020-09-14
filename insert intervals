@@ -1,0 +1,26 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> res=new ArrayList<>();
+        int newStart=newInterval[0];
+        int newEnd=newInterval[1];
+        //adding intervals before the new interval, whose end point is less than new start
+        int i=0;
+        while(i<intervals.length && intervals[i][1]<newStart) res.add(intervals[i++]);
+        //calculating the new interval
+        while(i<intervals.length && intervals[i][0]<=newEnd){
+            newStart=Math.min(newStart, intervals[i][0]);
+            newEnd=Math.max(newEnd, intervals[i][1]);
+            i++;
+        }
+        res.add(new int[]{newStart, newEnd});
+        //adding the rest
+        while(i<intervals.length && intervals[i][0]>newEnd){
+            res.add(intervals[i++]);
+        }
+          int[][] ans = new int[res.size()][];
+        for (int i1 = 0; i1 < res.size(); i1++) {
+            ans[i1] = res.get(i1);
+        }
+        return ans;
+    }
+}
