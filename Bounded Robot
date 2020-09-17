@@ -1,0 +1,52 @@
+class Solution {
+    public boolean isRobotBounded(String instructions) {
+    // robot is bounded if:
+    // end position is 0,0
+    // OR
+    // end direction is not North
+    char direction = 'N';
+    int x = 0;
+    int y = 0;
+        for(int i=0; i<instructions.length(); i++){
+            if(instructions.charAt(i)=='G'){
+                if(direction=='N'){
+                    y++;
+                }
+                  if(direction=='W'){
+                    x++;
+                }
+                  if(direction=='E'){
+                    x--;;
+                }
+                  if(direction=='S'){
+                    y--;
+                }
+            }
+            else if(instructions.charAt(i)=='L'){
+                  if (direction == 'N') {
+                direction = 'W';
+            } else if (direction == 'S') {
+                direction = 'E';
+            } else if (direction == 'W' ){
+                direction = 'S';
+            } else {
+                direction = 'N';
+            } 
+            }
+            else{
+                   if (direction == 'N') {
+                direction = 'E';
+            } else if (direction == 'S') {
+                direction = 'W';
+            } else if (direction == 'W') {
+                direction = 'N';
+            } else {
+                direction = 'S';
+            } 
+            }
+        }
+   
+    return (x == 0 && y == 0) || (direction != 'N');
+
+    }
+}
