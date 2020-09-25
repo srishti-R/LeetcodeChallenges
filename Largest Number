@@ -1,0 +1,15 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+        String ans="";
+        PriorityQueue<String> q=new PriorityQueue<>((s1, s2) -> (s2+s1).compareTo(s1+s2)>=0?1:-1);
+        for(int i:nums){
+            String m=i+"";
+            q.add(m);
+        }
+        while(!q.isEmpty()){
+            ans+=q.poll();
+        }
+        if(ans.charAt(0)=='0') return "0";
+        return ans;
+    }
+}
