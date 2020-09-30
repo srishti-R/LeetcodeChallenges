@@ -1,0 +1,24 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Map<String, Boolean> map=new HashMap<>();
+      return processString(s,wordDict,map);
+    }
+    
+    boolean processString(String s, List<String> wordDict, Map<String, Boolean> cache){
+          if(s.length()==0) return true;
+        if(wordDict.contains(s)) return true;
+        if(cache.containsKey(s)) return cache.get(s);
+       for(int i=1; i<=s.length(); i++){
+           String pre=s.substring(0,i);
+           if(wordDict.contains(pre) && processString(s.substring(i), wordDict, cache)){
+               cache.put(pre, true);
+               return true;
+           }
+           cache.put(pre,false);
+           }
+        
+        return false;
+    }
+    
+    
+}
