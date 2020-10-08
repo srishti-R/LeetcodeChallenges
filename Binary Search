@@ -1,0 +1,25 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        // for(int i=0; i<nums.length; ){
+        //     if(nums[i]<target){
+        //         i++;
+        //     }
+        //     else if(nums[i]>target){
+        //         return -1;
+        //     }
+        //     else return i;
+        // }
+        // return -1;
+        int high=nums.length-1;
+        int low=0;
+        
+        while(low<=high){
+            int mid=low+((high-low)/2);
+           if(nums[mid]==target) return mid;
+           else if(nums[mid]>target) high=mid-1;
+            else low=mid+1;
+        }
+        return -1;
+    }
+}
+#Status: didnt try with binary search earlier until i read the title.
