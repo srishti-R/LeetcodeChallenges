@@ -1,0 +1,18 @@
+class Solution {
+    public boolean buddyStrings(String A, String B) {
+        if(A.length()!=B.length()) return false;
+        int misses=0;
+        boolean duplicate=false;
+        int[] A_chars=new int[26];
+        int[] B_chars=new int[26];
+        for(int i=0; i<A.length(); i++){
+            if(A.charAt(i)!=B.charAt(i)) misses++;
+            A_chars[A.charAt(i)-'a']++;
+            B_chars[B.charAt(i)-'a']++;
+            if(A_chars[A.charAt(i)-'a']>=2) duplicate=true;
+        }
+        
+        return Arrays.equals(A_chars,B_chars) && (misses==2 || (misses==0 && duplicate));
+    }
+}
+#Status: took help with the logic part
