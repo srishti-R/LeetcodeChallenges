@@ -1,0 +1,36 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+          Stack<Integer> stack=new Stack<>();
+        
+        for(int i=0; i<asteroids.length;){
+            
+            if(stack.isEmpty() || stack.peek()>0 && asteroids[i]>0 || stack.peek()<0 && asteroids[i]<0 || stack.peek()<0 && asteroids[i]>0){
+                stack.add(asteroids[i]);
+                i++;
+            }
+            else {
+                int temp=stack.pop();
+                if(Math.abs(temp)!=Math.abs(asteroids[i])){
+                 int max=Math.max(Math.abs(temp), Math.abs(asteroids[i]));
+                    if(max==Math.abs(temp)){
+                        max=temp;
+                    }
+                    else max=asteroids[i];
+                    asteroids[i]=max;
+                }
+                else i++;
+                
+            }
+            
+    }
+         int[] result=new int[stack.size()];
+        
+        for(int i=stack.size()-1;i>=0;i--){
+            result[i]=stack.pop();
+        }
+        
+        return result;
+    }
+}
+
+#Status: took help from someone, took some time to grasp why add max=asteroids[i], then saw that we are not iterating the loop until we come across a case where the loop should resume. NICE APPROACH.
