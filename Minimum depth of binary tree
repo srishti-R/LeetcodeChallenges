@@ -1,0 +1,31 @@
+I was close but couldn't completely figure out dfs of binary tree.
+class Solution {
+    public int minDepth(TreeNode root) {
+       if(root==null) return 0;
+       if(root.left==null && root.right==null) return 1;
+        if(root.left==null) return minDepth(root.right)+1;
+        if(root.right==null) return minDepth(root.left)+1;
+        //if both children present
+        return Math.min(minDepth(root.left), minDepth(root.right))+1;
+    }
+}
+#approach 2: Before reading this, my naive soul thought dfs would be the best approach since it asks you to calculate depth and not breadth. i was wrong.
+  if(root!=null){
+           int d=1;
+            Queue<TreeNode> q=new LinkedList<>();
+            q.add(root);
+            while(!q.isEmpty()){
+                int cnt=q.size();
+                while(cnt-->0){
+                    TreeNode node=q.poll();
+                    if(node.left==null && node.right==null) return d;
+                    if(node.left!=null) q.add(node.left);
+                    if(node.right!=null) q.add(node.right);
+                }
+                d++;
+                    
+            }
+        }
+        return 0;
+    }
+    This one is more efficient, no need to traverse depth of every branch before telling the node count. kudos to the author.
