@@ -1,0 +1,32 @@
+   public boolean find132pattern(int[] nums) {
+        int[] min=nums.clone();
+       for(int i=1; i<min.length; i++){
+          min[i]=Math.min(min[i], min[i-1]); 
+       }
+        
+        // System.out.println(Arrays.toString(min));
+        
+        TreeSet<Integer> set=new TreeSet<>();
+        for(int i=nums.length-1; i>0; i--){
+            int num=nums[i];
+            if(set.lower(num)!=null){
+                
+            
+            int left=min[i-1];
+            
+            int right=set.lower(num);
+            // System.out.println(left+"left");
+                // System.out.println(right+"right");
+
+            if(left<right) {
+                // System.out.println("true");
+                return true;
+            }
+                }
+             set.add(num);
+        }
+        return false;
+    }
+}
+#Status: i would have taken the naive approach to run 2 loops and make it O(n*n), but since the question asked for o(logn) complexity, i searched for optimal solution.
+Had to debug at different points. Learned about treesets.
