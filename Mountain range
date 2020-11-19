@@ -1,0 +1,20 @@
+So after a long corona break, i am here.
+class Solution {
+    public int longestMountain(int[] arr) {
+       if(arr.length<3 || arr==null) return 0;
+        int prev=arr[0];
+        int res=0;
+        for(int i=1; i<arr.length-1; i++){
+           int next=arr[i+1];
+            if(arr[i]>prev && arr[i]>next){
+                int l=i;
+                while(l>0 && arr[l-1]<arr[l]) l--;
+                while(i<arr.length-1 && arr[i+1]<arr[i]) i++;
+                res=Math.max(res, i-l+1);
+            }
+            prev=arr[i];
+        }
+        return res;
+    }
+}
+#Status: Solved with hint.
