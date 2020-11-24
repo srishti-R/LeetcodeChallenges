@@ -1,0 +1,28 @@
+class Solution {
+    public int calculate(String s) {
+        Stack<Integer> stack=new Stack<>();
+        String t=s.trim().replaceAll(" ","");
+        String[] sarr=t.split("[\\+\\-\\*\\/]+");
+        String[] ops=t.split("[\\d]+");
+        stack.push(Integer.parseInt(sarr[0]));
+        for(int i=1; i<ops.length; i++){
+            int curr=Integer.parseInt(sarr[i]);
+            if(ops[i].equals("*")){
+                curr=stack.pop()*curr;
+            }
+            else if(ops[i].equals("/")){
+                curr=stack.pop()/curr;
+            }
+            else if(ops[i].equals("-")){
+                curr=-curr;
+            }
+        stack.push(curr);
+        }
+        int res=0;
+        while(stack.size()>0){
+            res+=stack.pop();
+        }
+       return res;
+    }
+}
+#Status: After so many hit and runs.
