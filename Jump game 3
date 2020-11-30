@@ -1,0 +1,23 @@
+class Solution {
+    public boolean canReach(int[] arr, int start) {
+        Set<Integer> visited=new HashSet<>();
+        Queue<Integer> q=new LinkedList<>();
+        q.add(start);
+        while(!q.isEmpty()){
+            int curr=q.peek();
+            q.poll();
+            if(arr[curr]==0) return true;
+            int j1=curr+arr[curr];
+            int j2=curr-arr[curr];
+            if(j1<arr.length && !visited.contains(j1)){
+                q.add(j1);
+                visited.add(j1);
+            }
+             if(j2>=0 && !visited.contains(j2)){
+                q.add(j2);
+                visited.add(j2);
+            }
+        }
+        return false;
+    }
+}
