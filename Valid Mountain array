@@ -1,0 +1,39 @@
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+        if(arr.length<3) return false;
+        int n=arr.length;
+        int max=0;
+        int maxInd=0;
+        for(int i=0; i<n; i++){
+            if(arr[i]>max) {
+                maxInd=i;
+                max=arr[i];
+            }
+        }
+        if(max==arr[n-1] || max==arr[0]) return false;
+        int i=maxInd-1, j=maxInd+1;
+        int maxX=max, maxY=max;
+       while(i>=0){
+           if(arr[i]<maxX){
+               maxX=arr[i];
+               i--;
+               // System.out.println(maxX+"maxX");
+               continue;
+           }
+           return false;
+       }
+         while(j<n){
+           if(arr[j]<maxY){
+               maxY=arr[j];
+               j++;
+               // System.out.println(maxY+"maxY");
+               continue;
+           }
+             return false;
+       }
+        // System.out.println(i+"i");
+        // System.out.println(j+"j");
+        return true;
+    }
+}
+#Status: SOlved
