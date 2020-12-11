@@ -1,0 +1,43 @@
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        ListNode curr=head;
+        ListNode temp=null;
+        while(curr!=null){
+            ListNode next=curr.next;
+            // System.out.println("curr1"+curr.val);
+            temp=sort(temp, curr);
+            curr=next;
+            // System.out.println("curr2"+curr.val);
+            // curr=curr.next;
+            // System.out.println("curr3"+curr);
+        }
+       
+        return temp;
+    }
+    
+    ListNode sort(ListNode sorted_head, ListNode curr){
+        if(sorted_head==null || curr.val<=sorted_head.val){
+           curr.next=sorted_head;
+            sorted_head=curr;
+            // printList(sorted_head);
+        }
+        else{
+           ListNode temp=sorted_head; 
+            while(temp.next!=null && curr.val>temp.next.val){
+                temp=temp.next;
+            }
+             curr.next=temp.next;
+            temp.next=curr;
+           // printList(sorted_head);
+        }
+        return sorted_head;
+    }
+    
+    void printList(ListNode head){
+        while(head!=null) {
+            System.out.println(head.val);
+            head=head.next;
+    }
+    }
+}
+#Status: Solved
