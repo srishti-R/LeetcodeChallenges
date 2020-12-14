@@ -1,0 +1,47 @@
+Phew!
+class Solution {
+     List<List<String>> res=new ArrayList<>();
+    public List<List<String>> partition(String s) {
+        if(s.length()==0) return res;
+        // String[] arr=s.split("");
+        // List<String> chars=Arrays.asList(arr);
+        // res.add(chars);
+        List<String> list=new ArrayList<>();
+        return getDromes(s, 0, list);
+    }
+    
+    List<List<String>> getDromes(String s, int start, List<String> list){
+        if(start==s.length()){
+            res.add(new ArrayList<>(list));
+            return res;
+        }
+        
+        for(int i=start+1; i<=s.length();i++ ){
+            String sub=s.substring(start,i);
+           if(isPalindrome(sub)){
+               list.add(sub);
+               getDromes(s, i, list);
+               list.remove(list.size()-1);
+           }
+        }
+        return res;
+    }
+    
+     
+private boolean isPalindrome(String str) {
+	int left = 0;
+	int right = str.length() - 1;
+ 
+	while (left < right) {
+		if (str.charAt(left) != str.charAt(right)) {
+			return false;
+		}
+ 
+		left++;
+		right--;
+	}
+ 
+	return true;
+}
+}
+#Status: Solved
