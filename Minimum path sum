@@ -1,0 +1,47 @@
+Solved this dp problem by myself, probably happiest rn.
+class Solution {
+    int m,n;
+    public int minPathSum(int[][] grid) {
+         m=grid.length;
+         n=grid[0].length;
+        int[][] dp=new int[m+1][n+1];
+        int sum=0;
+        for(int i=0; i<m; i++){
+            dp[i+1][1]=sum+grid[i][0];
+            sum=dp[i+1][1];
+        }
+        sum=0;
+         for(int j=0; j<n; j++){
+            dp[1][j+1]=sum+grid[0][j];
+             sum=dp[1][j+1];
+        }
+        // printArr(dp);
+        return getSum(grid, dp);
+    }
+    
+    int getSum(int[][] grid, int[][] dp){
+        //rest cases
+       for(int i=1;i<m;i++){
+           for(int j=1;j<n;j++){
+               dp[i+1][j+1]=Math.min(grid[i][j]+dp[i][j+1], grid[i][j]+dp[i+1][j]);
+               // System.out.println("grid"+grid[i][j]);
+               // System.out.println("dp cell"+dp[i-1][j]+dp[i][j-1]);
+               // printArr(dp);
+           }
+       }
+        
+        return dp[m][n];
+    }
+    //for debug
+    void printArr(int[][] dp){
+        int i=dp.length;
+        int j=dp[0].length;
+        for(int k=0; k<i; k++){
+            for(int n=0; n<j;n++){
+                System.out.print(dp[k][n]);
+            }
+            System.out.println("");
+        }
+    }
+}
+#Status; Solved
