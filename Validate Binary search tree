@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root==null || root.left==null && root.right==null) return true;
+        if(root.right!=null ){
+            if(root.right.val>root.val) return isValidBST(root.right);
+            else return false;
+        }
+           if(root.left!=null){
+               if(root.left.val<root.val) return isValidBST(root.left);
+               else return false;
+           }
+           
+    
+        else return false;
+    }
+}
+#Status:Could solve only 65/77 test cases.
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+       return bstUtil(root, Long.MIN_VALUE, Long.MAX_VALUE);
+}
+    boolean bstUtil(TreeNode node, long min, long max){
+        if(node==null) return true;
+        if(node.val>=max || node.val<=min) return false;
+        return bstUtil(node.left,min,node.val) && bstUtil(node.right, node.val, max);
+    }
+}
+#Status: Solved
