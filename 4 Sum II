@@ -1,0 +1,21 @@
+class Solution {
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        int n=A.length;
+        int count=0;
+        Map<Integer, Integer> map=new HashMap<>();
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n;j++){
+              if(!map.containsKey(A[i]+B[j])) map.put(A[i]+B[j],1);
+                else map.put(A[i]+B[j],map.get(A[i]+B[j])+1);
+            }
+         }
+         for(int i=0; i<n; i++){
+            for(int j=0; j<n;j++){
+              if(map.containsKey(-(C[i]+D[j]))) count+=map.get(-(C[i]+D[j]));
+            }
+         }
+                 
+        return count;
+    }
+}
+#Status: Solved. O(n^2) time complexity, O(n) space complexity.
