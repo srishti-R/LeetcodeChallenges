@@ -1,0 +1,49 @@
+class Solution {
+    boolean flag=false;
+    int idx,col1,col2;
+    int dp[][][];
+    public int cherryPickup(int[][] grid) {
+         idx=grid.length;
+        col1=grid[0].length;
+        col2=grid[0].length; 
+        dp=new int[idx][col1][col2];
+        
+    for (int[][] innerRow: dp)
+    {
+        for (int[] innerInnerRow: innerRow)
+        {
+        Arrays.fill(innerInnerRow, -1);
+        }
+    }
+        // System.out.println("i"+idx);
+        // System.out.println("col1"+col1);
+        // System.out.println("col2"+col2);
+
+        return cherryPickup(grid, 0, 0, col2-1);
+    }
+    
+    int cherryPickup(int[][] grid, int i, int rob1, int rob2){
+        //handling base
+        if(i>=idx) return 0; //returning Integer.MIN_VALUE here doesnt work for some reason i couldnt understand
+        if(rob1<0 || rob1>=col1) return Integer.MIN_VALUE;
+        if(rob2>=col2 || rob2<0) return Integer.MIN_VALUE;
+        if(dp[i][rob1][rob2]!=-1) return dp[i][rob1][rob2];
+        int curr=0;
+        curr+=grid[i][rob1];
+        curr+=grid[i][rob2];
+        if(rob1==rob2) curr-=grid[i][rob1];
+        int ans=Integer.MIN_VALUE;
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1-1, rob2-1));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1-1, rob2));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1-1, rob2+1));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1, rob2-1));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1, rob2));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1, rob2+1));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1+1, rob2-1));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1+1, rob2));
+        ans=Math.max(ans, curr+cherryPickup(grid,i+1,rob1+1, rob2+1));
+        dp[i][rob1][rob2]=ans;
+        return ans;
+    }
+}
+#Status: Took help.
