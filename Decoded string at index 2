@@ -1,0 +1,26 @@
+class Solution {
+    public String decodeAtIndex(String S, int K) {
+       long size=0;
+        int N=S.length();
+        for(int i=0; i<N; i++){
+            if(Character.isDigit(S.charAt(i))){
+                size=size*(S.charAt(i)-'0');
+            }
+            else size+=1;
+        }
+        // System.out.println("size"+size);
+        for(int i=N-1; i>=0; i--){
+          K%=size;
+            if(K==0 && Character.isAlphabetic(S.charAt(i))){
+                return ""+S.charAt(i);
+            }
+            if(Character.isDigit(S.charAt(i))){
+                size=size/(S.charAt(i)-'0');
+            }
+            else size-=1;
+        }
+        
+        return "0";
+    }
+}
+#Status: Took help.
